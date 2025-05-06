@@ -19,3 +19,4 @@ hem de bu projeleri birer girişim tohumu gibi büyütmek.
 ---
 
 ## 📸 Ekran Görüntüsü
+![readmeToDoApp](https://github.com/user-attachments/assets/8e2ae1a9-108d-4079-ab2e-1bccd3a53b7f)
