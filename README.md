@@ -1,10 +1,7 @@
-# 📝 ToDoListApp — Mini Görev Takip Projesi
+# 📝 ToDoApp — Mini Görev Takip Projesi
 
-Bu proje, yazılım geliştiriciliği yolculuğumda attığım ilk adımlardan biri.  
-Hedefim küçük ama gerçek işlevi olan uygulamalar geliştirerek kendimi adım adım ilerletmek.  
-**ToDoListApp**, bu süreçte tamamladığım ilk uygulamadır.  
-Amacım toplamda en az 5 farklı mini proje geliştirerek hem kendimi teknik olarak geliştirmek  
-hem de bu projeleri birer girişim tohumu gibi büyütmek.
+Küçük ama gerçek işlevi olan uygulamalar geliştirerek kendimi adım adım ilerletme kararımın ilk projesi.
+Amacım en az 5 farklı mini proje geliştirerek hem kendimi teknik olarak geliştirmek hem de bu projeleri birer girişim tohumu gibi büyütmek.
 
 ---
 
