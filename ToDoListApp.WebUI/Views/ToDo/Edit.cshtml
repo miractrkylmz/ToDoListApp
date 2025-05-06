@@ -1,0 +1,41 @@
+﻿@model ToDoListApp.EntityLayer.Concrete.ToDo
+
+@{
+    ViewBag.Title = "Görev Düzenle";
+}
+
+<div class="container mt-4">
+    <div class="card bg-dark border-secondary">
+        <div class="card-header border-secondary text-light">
+            <h3>✏️ Görev Düzenle</h3>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm())
+            {
+                @Html.HiddenFor(x => x.Id)
+
+                <div class="mb-3">
+                    @Html.LabelFor(x => x.Title, htmlAttributes: new { @class = "form-label text-light" })
+                    @Html.TextBoxFor(x => x.Title, new { @class = "form-control bg-secondary text-white border-0" })
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    @Html.LabelFor(x => x.Description, htmlAttributes: new { @class = "form-label text-light" })
+                    @Html.TextAreaFor(x => x.Description, new { @class = "form-control bg-secondary text-white border-0", rows = 3 })
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="form-check mb-3">
+                    @Html.CheckBoxFor(x => x.IsCompleted, new { @class = "form-check-input", id = "IsCompleted" })
+                    @Html.LabelFor(x => x.IsCompleted, htmlAttributes: new { @class = "form-check-label text-light", @for = "IsCompleted" })
+                </div>
+
+                <button type="submit" class="btn btn-success">Güncelle</button>
+                <a href="@Url.Action("Index", "ToDo")" class="btn btn-outline-light ms-2">İptal</a>
+            }
+        </div>
+    </div>
+</div>
+
+

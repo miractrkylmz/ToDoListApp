@@ -1,0 +1,239 @@
+﻿body {
+    background-color: #1e1e2f;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', sans-serif;
+    padding: 50px;
+}
+
+main {
+    padding-top: 30px;
+}
+
+/* Kartlar (görev kutuları) için */
+.card {
+    background-color: #2c2f3f !important;
+    border: none;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Butonlar */
+.btn-custom {
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+}
+
+    .btn-custom:hover {
+        background-color: #ff4c4c;
+    }
+
+/* Tablo arka planı koyulaşsın */
+.table {
+    background-color: #2c2f3f;
+    color: #e0e0e0;
+}
+
+    /* Tablo başlığı ve satırlar */
+    .table th {
+        background-color: #2c2f3f;
+        color: #ffcc70;
+    }
+
+    .table td {
+        background-color: #2c2f3f;
+        color: #ffffff;
+        border-color: #444; /* çizgiler biraz daha yumuşak */
+    }
+
+/* Checkbox ikonları, yeşil alert vb. */
+.alert {
+    background-color: #2c2f3f;
+    color: #aaf0d1;
+    border: none;
+}
+
+/* Footer yazısı çok silik görünmesin */
+footer {
+    color: #888;
+}
+
+.card-title {
+    color: #ffcc70;
+}
+
+h3 {
+    color: #ffcc70;
+}
+
+h4 {
+    color: #ffcc70;
+}
+
+ {
+    color: #ffcc70;
+}
+
+label {
+    color: #e0e0e0;
+    font-weight: 500;
+}
+
+a {
+    text-decoration: none;
+    color: inherit; /* Rengi başlık ile uyumlu yapar */
+}
+
+/* Kart ve genel */
+.completed-tasks-card {
+    background-color: #2c2f3f;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+    /* Başlık */
+    .completed-tasks-card h3 {
+        color: #6bcf6b;
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+
+/* Liste */
+.completed-tasks-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Her görev öğesi */
+.completed-task-item {
+    background-color: #3a3d56;
+    padding: 12px;
+    margin: 5px 0;
+    border-radius: 8px;
+    color: #e0e0e0;
+    font-size: 1.1rem;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+    .completed-task-item:hover {
+        background-color: #6bcf6b;
+        color: #1e1e2f;
+    }
+
+    /* Açılır açıklama – animasyonlu */
+    .completed-task-item .task-desc {
+        max-height: 0;
+        overflow: hidden;
+        background-color: #1e1e2f;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        color: #cfcfcf;
+        margin-top: 8px;
+        padding: 0 8px;
+        transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+
+    .completed-task-item.open .task-desc {
+        max-height: 500px;
+        padding: 8px;
+    }
+
+    .completed-task-item .task-desc p {
+        margin: 4px 0;
+        font-size: 0.9rem;
+    }
+
+        .completed-task-item .task-desc p strong {
+            color: #6bcf6b;
+        }
+    .completed-task-item .toggle-icon {
+        display: inline-block;
+        margin-right: 10px;
+        transition: transform 0.3s ease;
+        vertical-align: middle;
+        stroke: #cfcfcf; /* ikon rengi */
+    }
+
+    /* Açıldığında yukarı döner (aşağıyı gösteriyordu zaten) */
+    .completed-task-item.open .toggle-icon {
+        transform: rotate(180deg);
+    }
+
+/* Yapılacaklar listesi kartı */
+.todo-list-card {
+    background-color: #2c2f3f;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+    .todo-list-card h4 {
+        color: #ffcc70;
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+
+/* Liste sıfırlama */
+.todo-tasks-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Her görev öğesi */
+.todo-task-item {
+    background-color: #3a3d56;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 6px 0;
+    color: #e0e0e0;
+    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+}
+
+    /* Hover efekti - turuncumsu */
+    .todo-task-item:hover {
+        background-color: #ff8c66;
+        color: #1e1e2f;
+    }
+
+    /* Tıklanabilir ikon */
+    .todo-task-item .toggle-icon {
+        display: inline-block;
+        transition: transform 0.3s ease;
+        stroke: #cfcfcf;
+        vertical-align: middle;
+    }
+
+    /* Açıldığında ikonu döndür */
+    .todo-task-item.open .toggle-icon {
+        transform: rotate(180deg);
+    }
+
+    /* Açılır açıklama kısmı */
+    .todo-task-item .task-desc {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, opacity 0.3s ease;
+        opacity: 0;
+        margin-top: 8px;
+        padding: 0 10px;
+        background-color: #1e1e2f;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        color: #cfcfcf;
+    }
+
+    /* Açık hali */
+    .todo-task-item.open .task-desc {
+        max-height: 500px;
+        opacity: 1;
+        padding: 10px;
+    }

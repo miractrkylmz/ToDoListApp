@@ -1,0 +1,162 @@
+﻿@model List<ToDoListApp.EntityLayer.Concrete.ToDo>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Ana Sayfa";
+    var activeTask = Model.FirstOrDefault(x => x.StartTime != null && x.IsCompleted == false);
+}
+
+<!-- ÜST KISIM - Yapılacaklar -->
+<div class="card todo-list-card">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>📋 Yapılacaklar Listesi</h4>
+        <a href="@Url.Action("Add", "ToDo")" class="btn btn-success">+ Görev Ekle</a>
+    </div>
+    <ul class="todo-tasks-list">
+        @foreach (var item in Model.Where(x => !x.IsCompleted))
+        {
+            <li class="todo-task-item" data-description="@item.Description" data-id="@item.Id">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <svg class="toggle-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 10px;">
+                            <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                        <span>@item.Title</span>
+                    </div>
+                    <span class="task-actions">
+                        <form asp-action="StartTask" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit" class="btn btn-primary btn-sm">İşe Başla</button>
+                        </form>
+                        <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-warning btn-sm ms-2">Düzenle</a>
+                        <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger btn-sm ms-2">Sil</a>
+                    </span>
+                </div>
+                <div class="task-desc">
+                    @item.Description
+                </div>
+            </li>
+        }
+    </ul>
+</div>
+
+<!-- ORTA KISIM - Aktif Görev ve Timer -->
+@if (activeTask != null)
+{
+    var task = activeTask;
+    <div class="card text-center">
+        <h4>⏳ Aktif Görev: @task.Title</h4>
+        <p style="color: #e0e0e0;">@task.Description</p>
+
+        <div id="timer" style="color: #e0e0e0;font-size: 2rem; margin: 20px 0;">00:00:00</div>
+
+        <form asp-action="CompleteTask" method="post">
+            <input type="hidden" name="id" value="@task.Id" />
+            <button type="submit" class="btn btn-success">İşi Bitir</button>
+        </form>
+
+        <script>
+            const startTime = new Date('@task.StartTime?.ToString("yyyy-MM-ddTHH:mm:ss")');
+            const timerElement = document.getElementById("timer");
+
+            function updateTimer() {
+                const now = new Date();
+                const diff = new Date(now - startTime);
+                const hours = diff.getUTCHours().toString().padStart(2, '0');
+                const minutes = diff.getUTCMinutes().toString().padStart(2, '0');
+                const seconds = diff.getUTCSeconds().toString().padStart(2, '0');
+                timerElement.textContent = `${hours}:${minutes}:${seconds}`;
+            }
+
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        </script>
+    </div>
+}
+
+<!-- ALT KISIM - Tamamlananlar -->
+<div class="card completed-tasks-card">
+    <h3>✅ Tamamlanan Görevler</h3>
+    <ul class="completed-tasks-list">
+        @foreach (var item in Model.Where(x => x.IsCompleted))
+        {
+            <li class="completed-task-item" data-description="@item.Description">
+                <svg class="toggle-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9" />
+                </svg>
+                @item.Title
+                <div class="task-desc">
+                    <p>@item.Description</p>
+                    @{
+                        var duration = item.CompletedDuration;
+                        var parts = new List<string>();
+
+                        if (duration.HasValue)
+                        {
+                            if (duration.Value.Days > 0)
+                            {
+                                parts.Add($"{duration.Value.Days} gün");
+                            }
+                            if (duration.Value.Hours > 0)
+                            {
+                                parts.Add($"{duration.Value.Hours} saat");
+                            }
+                            if (duration.Value.Minutes > 0)
+                            {
+                                parts.Add($"{duration.Value.Minutes} dakika");
+                            }
+                            if (duration.Value.Seconds > 0)
+                            {
+                                parts.Add($"{duration.Value.Seconds} saniye");
+                            }
+                        }
+
+                        var formattedDuration = parts.Any() ? string.Join(" ", parts) : "Süre bilgisi yok";
+                    }
+                    <p><strong>Tamamlanma Süresi:</strong> @formattedDuration</p>
+
+                    <form asp-action="Delete" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <button type="submit" class="btn btn-danger btn-sm">Kaldır</button>
+                    </form>
+                </div>
+            </li>
+        }
+    </ul>
+</div>
+
+@section Scripts {
+    <script>
+        let seconds = 0;
+        const timerElement = document.getElementById("timer");
+        if (timerElement) {
+            setInterval(() => {
+                seconds++;
+                const hrs = String(Math.floor(seconds / 3600)).padStart(2, '0');
+                const mins = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
+                const secs = String(seconds % 60).padStart(2, '0');
+                timerElement.textContent = `${hrs}:${mins}:${secs}`;
+            }, 1000);
+        }
+    </script>
+
+    <script>
+        document.querySelectorAll('.completed-task-item').forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('open');
+            });
+        });
+    </script>
+
+    <script>
+        document.querySelectorAll('.todo-task-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                if (e.target.closest('.task-actions')) return;
+                item.classList.toggle('open');
+            });
+        });
+    </script>
+}
+
+
