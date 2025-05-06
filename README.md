@@ -19,4 +19,5 @@ hem de bu projeleri birer girişim tohumu gibi büyütmek.
 ---
 
 ## 📸 Ekran Görüntüsü
-![readmeToDoApp](https://github.com/user-attachments/assets/8e2ae1a9-108d-4079-ab2e-1bccd3a53b7f)
+![readmeToDoApp](https://github.com/user-attachments/assets/639b371b-7b70-46b9-be9c-4099b1b01d90)
+
